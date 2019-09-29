@@ -77,6 +77,7 @@ Rules are the following:
 - All root requests are redirected to **index.html** 
 - All requests to **index.html** are redirected to **ping.html**
 - All other requests are forbidden with HTTP Error 403
+
 ![Fig.9](images/9.png)
 ### Opened a debug console in browser and verified the configured redirects
 ![Fig.10](images/10.png)
@@ -89,20 +90,26 @@ yum -y install cronolog
 ```
 ### Modified vhosts' logging section to work with cronolog
 ![Fig.11](images/11.png)
+
 Log files are placed under the ``/var/log/Kiryl_Rusetski`` folder with subfolders indicating year, month and day when particular web server events were logged, as evidenced by the following two screenshots:
+
 ![Fig.12](images/12.png)
 ![Fig.13](images/13.png)
 
 ## Task 4
 ### Configured rsyslog service to log web server events
 ![Fig.14](images/14.png)
+
 Last line of the above screenshot means that syslog facility **local1** is configured to write to the ``/var/log/Kiryl_Rusetski/apache.log`` file
 ### Configured the vhost to use the local1 facility of the rsyslog service
 ![Fig.15](images/15.png)
+
 Error and access logs will therefore go to the ``/var/log/Kiryl_Rusetski/apache.log`` file
 ### Tested the config with curl
 ![Fig.16](images/16.png)
+
 Access log entries:
+
 ![Fig.18](images/18.png)
 
 ### Stopped httpd server to test error log redirection
@@ -110,6 +117,8 @@ Access log entries:
 systemctl stop httpd
 ```
 Error log entries:
+
 ![Fig.17](images/17.png)
+
 Above screenshot shows that server has caught a **SIGWINCH** signal and therefore shut itself down gracefully
 
